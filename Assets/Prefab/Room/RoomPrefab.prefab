@@ -172,5 +172,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 0
   line: 0
-  roomData: {fileID: 11400000, guid: e63ba20215637e54e9aca1de1f0c803c, type: 2}
+  roomData: {fileID: 11400000, guid: 1c0bc292287aa0c4faaa30d7f2710002, type: 2}
   roomState: 0

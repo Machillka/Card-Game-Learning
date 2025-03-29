@@ -1,16 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class MapConfigSO : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+[CreateAssetMenu(fileName = "MapConfigSO", menuName = "Map/MapConfigSO")]
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public class MapConfigSO : ScriptableObject
+{
+    public List<RoomBlueprint> roomBlueprints;
+}
+
+[System.Serializable]
+public class RoomBlueprint
+{
+    public int min, max;
+    public RoomType roomType;
 }
