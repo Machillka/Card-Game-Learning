@@ -28,8 +28,8 @@ public class Room : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
-        Debug.Log("Room clicked: " + roomData.roomType);
         loadRoomEvent.RaiseEvent(roomData, this);
+        Debug.Log("Room clicked: " + roomData.roomType);
     }
 
     /// <summary>
@@ -38,7 +38,7 @@ public class Room : MonoBehaviour
     /// <param name="column"></param>
     /// <param name="line"></param>
     /// <param name="roomData"></param>
-    public void SetupRoom(int column, int line, RoomDataSO roomData)
+    public void SetupRoom(int column, int line, RoomDataSO roomData, RoomState roomState = RoomState.Locked)
     {
         this.column = column;
         this.line = line;

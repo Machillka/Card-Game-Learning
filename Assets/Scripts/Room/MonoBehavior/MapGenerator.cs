@@ -6,8 +6,9 @@ public class MapGenerator : MonoBehaviour
     [Header("Prefabs")]
     public Room roomPrefab;
     public LineRenderer lineRenderer;
-
+    [Header("Config")]
     public MapConfigSO mapConfig;
+    public MapLayoutSO mapLayout;
 
     public float border;
 
@@ -39,15 +40,25 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    private void Start()
+    /// <summary>
+    /// 每次激活的时候都判断是否已经有存储过的房间，如果有则加载，没有则生成
+    /// 如果要进行游戏进度保存 可以直接序列化 mapLayoutSO 进行保存或加载
+    /// </summary>
+    private void OnEnable()
     {
-        CreateMap();
+        if (mapLayout.mapRoomDataList.Count > 0)
+        {
+            LoadMap();
+        }
+        else
+        {
+            CreateMap();
+        }
     }
 
     public void CreateMap()
     {
         List<Room> previousColumeRooms = new List<Room>();
-
         // Create the map
         for (int column = 0; column < mapConfig.roomBlueprints.Count; column++)
         {
@@ -74,6 +85,7 @@ public class MapGenerator : MonoBehaviour
                 // 生成房间
                 var room = Instantiate(roomPrefab, generatePosition, Quaternion.identity, transform);
                 RoomType newType = GetRandomRoomType(mapConfig.roomBlueprints[column].roomType);
+                // 因为是初始化第一个 map, 所以都是Locked状态
                 room.SetupRoom(column, i - 1, GetRoomData(newType));
                 rooms.Add(room);
 
@@ -86,6 +98,7 @@ public class MapGenerator : MonoBehaviour
             }
             previousColumeRooms = currentColumnRooms;
         }
+        SaveMap();
     }
 
     [ContextMenu("ReGenerateRooms")]
@@ -165,5 +178,57 @@ public class MapGenerator : MonoBehaviour
         string roomTypeOption = options[Random.Range(0, options.Length)];
 
         return (RoomType)System.Enum.Parse(typeof(RoomType), roomTypeOption);
+    }
+
+    private void SaveMap()
+    {
+        mapLayout.mapRoomDataList = new List<MapRoomData>();
+        mapLayout.linePositionList = new List<LinePosition>();
+
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            var room = new MapRoomData()
+            {
+                posX = rooms[i].transform.position.x,
+                posY = rooms[i].transform.position.y,
+                column = rooms[i].column,
+                line = rooms[i].line,
+                roomData = rooms[i].roomData,
+                roomState = rooms[i].roomState
+            };
+
+            mapLayout.mapRoomDataList.Add(room);
+        }
+
+        for (int i = 0; i < lines.Count; i++)
+        {
+            var line = new LinePosition()
+            {
+                startPos = new SerializeVector3(lines[i].GetPosition(0)),
+                endPos = new SerializeVector3(lines[i].GetPosition(1))
+            };
+
+            mapLayout.linePositionList.Add(line);
+        }
+    }
+
+    private void LoadMap()
+    {
+        // 读取房间
+        foreach (var room in mapLayout.mapRoomDataList)
+        {
+            var newPos = new Vector3(room.posX, room.posY, 0);
+            var newRoom = Instantiate(roomPrefab, newPos, Quaternion.identity, transform);
+            newRoom.SetupRoom(room.column, room.line, room.roomData, room.roomState);
+            rooms.Add(newRoom);
+        }
+
+        foreach (var line in mapLayout.linePositionList)
+        {
+            var newLine = Instantiate(lineRenderer, Vector3.zero, Quaternion.identity, transform);
+            newLine.SetPosition(0, line.startPos.ToVector3());
+            newLine.SetPosition(1, line.endPos.ToVector3());
+            lines.Add(newLine);
+        }
     }
 }

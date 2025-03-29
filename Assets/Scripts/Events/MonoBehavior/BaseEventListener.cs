@@ -24,6 +24,7 @@ public class BaseEventListener<T> : MonoBehaviour
 
     private void OneventRaised(T value)
     {
+        Debug.Log("Event raised: " + value);
         response.Invoke(value);
     }
 }

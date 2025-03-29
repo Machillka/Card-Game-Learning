@@ -151,6 +151,7 @@ MonoBehaviour:
   roomPrefab: {fileID: 8181335413883713242, guid: 78b39ea6344334b469201a420716a424, type: 3}
   lineRenderer: {fileID: 6616644300723204696, guid: 0800dd96c972a594b8ef990f80cf743f, type: 3}
   mapConfig: {fileID: 11400000, guid: 2bf00b4325020514b8e8fc32b33679ad, type: 2}
+  mapLayout: {fileID: 11400000, guid: d8ac72b8f09dd16458d4e6203934b3c8, type: 2}
   border: 3
   roomDataList:
   - {fileID: 11400000, guid: 6f88886b6efd0a84a890c553fd539a9d, type: 2}
