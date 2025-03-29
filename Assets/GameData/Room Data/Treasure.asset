@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb7116141a51fa943839e7f7ff6936f2, type: 3}
-  m_Name: MinorEnemy
+  m_Name: Treasure
   m_EditorClassIdentifier: 
-  roomIcon: {fileID: 21300000, guid: e6eed6c2563884002ae7cb10446a7474, type: 3}
-  roomType: 1
+  roomIcon: {fileID: 21300000, guid: 0ce208f8f0a7e4b7c85456c91a775378, type: 3}
+  roomType: 8
   sceneToLoad:
-    m_AssetGUID: 82906beef0950c24c9e1c82c369c1647
+    m_AssetGUID: 861e9f551b00fb24193671f92e2480ed
     m_SubObjectName: 
     m_SubObjectGUID: 
     m_SubObjectType: 

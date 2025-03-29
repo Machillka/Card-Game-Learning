@@ -19,6 +19,10 @@ public class MapGenerator : MonoBehaviour
     private List<Room> rooms = new List<Room>();
     private List<LineRenderer> lines = new List<LineRenderer>();
 
+    public List<RoomDataSO> roomDataList = new List<RoomDataSO>();
+    // 通过房间类型返回数据
+    private Dictionary<RoomType, RoomDataSO> roomDataDict = new Dictionary<RoomType, RoomDataSO>();
+
     private void Awake()
     {
         // 得到世界坐标的长和宽 得到正值
@@ -28,6 +32,11 @@ public class MapGenerator : MonoBehaviour
         // +1 为了留出一个空位
         columnWidth = screenWidth / (mapConfig.roomBlueprints.Count + 1);
         Debug.Log("screenWidth: " + screenWidth + " screenHeight: " + screenHeight + " columnWidth: " + columnWidth);
+
+        foreach (var roomData in roomDataList)
+        {
+            roomDataDict.Add(roomData.roomType, roomData);
+        }
     }
 
     private void Start()
@@ -62,9 +71,12 @@ public class MapGenerator : MonoBehaviour
             {
                 // 每次生成, 向下位移一个offset
                 generatePosition.y = screenHeight / 2 - roomGapY * i;
+                // 生成房间
                 var room = Instantiate(roomPrefab, generatePosition, Quaternion.identity, transform);
-
+                RoomType newType = GetRandomRoomType(mapConfig.roomBlueprints[column].roomType);
+                room.SetupRoom(column, i - 1, GetRoomData(newType));
                 rooms.Add(room);
+
                 currentColumnRooms.Add(room);
             }
             // 如果不是第一列 则连接上一列
@@ -139,5 +151,19 @@ public class MapGenerator : MonoBehaviour
         lines.Add(line);
 
         return targetRoom;
+    }
+
+    private RoomDataSO GetRoomData(RoomType roomType)
+    {
+        return roomDataDict[roomType];
+    }
+
+    private RoomType GetRandomRoomType(RoomType flags)
+    {
+        string[] options = flags.ToString().Split(',');
+
+        string roomTypeOption = options[Random.Range(0, options.Length)];
+
+        return (RoomType)System.Enum.Parse(typeof(RoomType), roomTypeOption);
     }
 }
