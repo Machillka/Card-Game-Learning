@@ -148,8 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a265fd0030dc8a04e9e46286c0363b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapConfig: {fileID: 11400000, guid: 2bf00b4325020514b8e8fc32b33679ad, type: 2}
   roomPrefab: {fileID: 8181335413883713242, guid: 78b39ea6344334b469201a420716a424, type: 3}
+  lineRenderer: {fileID: 6616644300723204696, guid: 0800dd96c972a594b8ef990f80cf743f, type: 3}
+  mapConfig: {fileID: 11400000, guid: 2bf00b4325020514b8e8fc32b33679ad, type: 2}
   border: 3
 --- !u!4 &411614683
 Transform:
