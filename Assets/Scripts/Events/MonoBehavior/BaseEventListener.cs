@@ -6,7 +6,7 @@ public class BaseEventListener<T> : MonoBehaviour
     public BaseEventSO<T> eventSO;
     public UnityEvent<T> response;
 
-    public void OnEnble()
+    private void OnEnable()
     {
         if (eventSO != null)
         {
