@@ -48,10 +48,12 @@ public class MapGenerator : MonoBehaviour
     {
         if (mapLayout.mapRoomDataList.Count > 0)
         {
+            Debug.Log("LoadMap");
             LoadMap();
         }
         else
         {
+            Debug.Log("CreateMap");
             CreateMap();
         }
     }
@@ -85,8 +87,15 @@ public class MapGenerator : MonoBehaviour
                 // 生成房间
                 var room = Instantiate(roomPrefab, generatePosition, Quaternion.identity, transform);
                 RoomType newType = GetRandomRoomType(mapConfig.roomBlueprints[column].roomType);
-                // 因为是初始化第一个 map, 所以都是Locked状态
-                room.SetupRoom(column, i - 1, GetRoomData(newType));
+                RoomState roomState = RoomState.Locked;
+
+                // 第一列可以访问
+                if (column == 0)
+                {
+                    roomState = RoomState.Attainable;
+                }
+
+                room.SetupRoom(column, i - 1, GetRoomData(newType), roomState);
                 rooms.Add(room);
 
                 currentColumnRooms.Add(room);
@@ -131,8 +140,9 @@ public class MapGenerator : MonoBehaviour
 
         foreach (var room in previousColumeRooms)
         {
-            var targetRoom = ConnectToRamdomRoom(room, currentColumnRooms);
+            var targetRoom = ConnectToRamdomRoom(room, currentColumnRooms, false);
             connectedColumeRooms.Add(targetRoom);
+            // room.linkTo.Add(new Vector2Int(targetRoom.column, targetRoom.line));
         }
 
         // 若当前房间没有与上一列房间的连接，于是随机从上一列房间中选取一个进行连接
@@ -140,7 +150,8 @@ public class MapGenerator : MonoBehaviour
         {
             if (!connectedColumeRooms.Contains(room))
             {
-                ConnectToRamdomRoom(room, previousColumeRooms);
+                var targetRoom = ConnectToRamdomRoom(room, previousColumeRooms, true);
+                // targetRoom.linkTo.Add(new Vector2Int(room.column, room.line));
             }
         }
     }
@@ -150,13 +161,22 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     /// <param name="room">当前要连线的房间</param>
     /// <param name="currentColumnRooms">从中选取一个要连线的房间</param>
-    /// <returns></returns>
-    private Room ConnectToRamdomRoom(Room room, List<Room> currentColumnRooms)
+    /// <param name="checkDirection">连接方向 False: 正向连接; True:反向连接</param>
+    /// <returns>返回目标连线的 room</returns>
+    private Room ConnectToRamdomRoom(Room room, List<Room> currentColumnRooms, bool checkDirection = false)
     {
         Room targetRoom;
 
         targetRoom = currentColumnRooms[Random.Range(0, currentColumnRooms.Count)];
 
+        if (!checkDirection)
+        {
+            room.linkTo.Add(new Vector2Int(targetRoom.column, targetRoom.line));
+        }
+        else
+        {
+            targetRoom.linkTo.Add(new Vector2Int(room.column, room.line));
+        }
         // 创建连线
         var line = Instantiate(lineRenderer, Vector3.zero, Quaternion.identity, transform);
         line.SetPosition(0, room.transform.position);
@@ -194,7 +214,8 @@ public class MapGenerator : MonoBehaviour
                 column = rooms[i].column,
                 line = rooms[i].line,
                 roomData = rooms[i].roomData,
-                roomState = rooms[i].roomState
+                roomState = rooms[i].roomState,
+                linkTo = rooms[i].linkTo
             };
 
             mapLayout.mapRoomDataList.Add(room);
@@ -220,6 +241,7 @@ public class MapGenerator : MonoBehaviour
             var newPos = new Vector3(room.posX, room.posY, 0);
             var newRoom = Instantiate(roomPrefab, newPos, Quaternion.identity, transform);
             newRoom.SetupRoom(room.column, room.line, room.roomData, room.roomState);
+            newRoom.linkTo = room.linkTo;
             rooms.Add(newRoom);
         }
 
