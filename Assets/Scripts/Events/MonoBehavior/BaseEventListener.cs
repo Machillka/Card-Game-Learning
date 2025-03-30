@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 public class BaseEventListener<T> : MonoBehaviour
 {
-    public BaseEventSO<T> eventSO;
-    public UnityEvent<T> response;
+    public BaseEventSO<T> eventSO;          // 监听的事件
+    public UnityEvent<T> response;          // 事件响应
 
     private void OnEnable()
     {
