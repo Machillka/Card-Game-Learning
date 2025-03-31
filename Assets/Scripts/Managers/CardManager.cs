@@ -47,9 +47,22 @@ public class CardManager : MonoBehaviour
     }
     #endregion
 
+    // 关闭游戏的时候清空手牌
+    private void OnDisable()
+    {
+        currnetCardLibrary.cardLibraryList.Clear();
+    }
+
+    /// <summary>
+    /// 获得卡牌，并且进行设置
+    /// 1. 设置大小 -> 为了在 dotween 实现放大效果
+    /// </summary>
+    /// <returns>从对象池里获得一张卡牌</returns>
     public GameObject GetCardObject()
     {
-        return poolTool.GetObjectFromPool();
+        var cardObj = poolTool.GetObjectFromPool();
+        cardObj.transform.localScale = Vector3.zero;
+        return cardObj;
     }
 
     public void DiscardCardObject(GameObject cardObj)

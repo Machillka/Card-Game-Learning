@@ -7,8 +7,14 @@ public class CardLayoutManager : MonoBehaviour
     // public bool isHorizontal = false;
     public float maxWidth = 7f;
     public float cardSpacing = 2f;
-    public Vector3 centerPosition;
+    public float horizontalCenterY = -4.5f;
+    public float sectorCenterY = -21.5f;
 
+    [Header("弧度排列参数")]
+    public float angleBetweenCards = 7f;
+    public float radius = 17f;
+
+    private Vector3 centerPosition;
     private List<Vector3> cardPositionList = new List<Vector3>();
     private List<Quaternion> cardRotationList = new List<Quaternion>();
 
@@ -23,7 +29,7 @@ public class CardLayoutManager : MonoBehaviour
         }
         else
         {
-            CalulateSectorCardPosition();
+            CalulateSectorCardPosition(numberOfCards);
         }
     }
 
@@ -40,13 +46,30 @@ public class CardLayoutManager : MonoBehaviour
         return new CardTransform(cardPositionList[index], cardRotationList[index]);
     }
 
-    private void CalulateSectorCardPosition()
+    private void CalulateSectorCardPosition(int numberOfCards)
     {
+        //TODO: 限制扇形弧度范围（同横向排列一样）
+        // 向下移动中心点
+        centerPosition = Vector3.up * sectorCenterY;
 
+        // 计算总的角度变化
+        float cardAngle = (numberOfCards - 1) * angleBetweenCards / 2;
+
+        for (int i = 0; i < numberOfCards; i++)
+        {
+            var deltaAngle = cardAngle -  i * angleBetweenCards;
+            var pos = SectorCardPositon(deltaAngle);
+            var rotation = Quaternion.Euler(0, 0, deltaAngle);
+
+            cardPositionList.Add(pos);
+            cardRotationList.Add(rotation);
+        }
     }
 
     private void CalulateHorizontalCardPosition(int numberOfCards)
     {
+        centerPosition = Vector3.up * horizontalCenterY;
+
         float currentWidth = cardSpacing * (numberOfCards - 1);
         float totalWidtrh = MathF.Min(maxWidth, currentWidth);
 
@@ -62,5 +85,14 @@ public class CardLayoutManager : MonoBehaviour
             cardPositionList.Add(pos);
             cardRotationList.Add(rotation);
         }
+    }
+
+    private Vector3 SectorCardPositon(float angle)
+    {
+        return new Vector3(
+            centerPosition.x - Mathf.Sin(Mathf.Deg2Rad * angle) * radius,
+            centerPosition.y + Mathf.Cos(Mathf.Deg2Rad * angle) * radius,
+            0
+        );
     }
 }

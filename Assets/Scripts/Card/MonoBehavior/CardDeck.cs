@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
+using DG.Tweening;
 
 public class CardDeck : MonoBehaviour
 {
     public CardManager cardManager;
     public CardLayoutManager cardLayoutManager;
+    public Vector3 deckPosition;                                            // 抽牌出现的位置
+    public float motionDelay = 0.2f;                                        // 移动动画前后延迟
+    public bool isHorizontal;
 
     private List<CardDataSO> drawDeck = new List<CardDataSO>();             // 抽牌堆
     private List<CardDataSO> discardDeck = new List<CardDataSO>();          // 弃牌堆
@@ -50,25 +55,37 @@ public class CardDeck : MonoBehaviour
         {
             if (drawDeck.Count == 0)
             {
-                break;
+                //TODO: 洗牌 更新弃牌堆|抽牌堆的数字
             }
             CardDataSO currentCardData = drawDeck[0];
             drawDeck.RemoveAt(0);
             Card card = cardManager.GetCardObject().GetComponent<Card>();
             card.Init(currentCardData);
+            card.transform.position = deckPosition;
             handCardList.Add(card);
+
+            var delayTime = i * motionDelay;
             // 每次抽取卡牌后重新计算布局
-            SetCardLayout();
+            SetCardLayout(delayTime);
         }
     }
 
-    private void SetCardLayout()
+    private void SetCardLayout(float delatTime)
     {
         for (int i = 0; i < handCardList.Count; i++)
         {
             Card currentCard = handCardList[i];
-            CardTransform cardTransform = cardLayoutManager.GetCardTransform(i, handCardList.Count, true);
-            currentCard.transform.SetPositionAndRotation(cardTransform.position, cardTransform.rotation);
+            //TODO: 化简重复计算部分
+            CardTransform cardTransform = cardLayoutManager.GetCardTransform(i, handCardList.Count, isHorizontal);
+            // currentCard.transform.SetPositionAndRotation(cardTransform.position, cardTransform.rotation);
+            // 放大后开始移动;
+            currentCard.transform.DOScale(Vector3.one, 0.2f).SetDelay(delatTime).onComplete = () =>
+            {
+                currentCard.transform.DORotateQuaternion(cardTransform.rotation, 0.3f);
+                currentCard.transform.DOMove(cardTransform.position, 0.2f);
+            };
+
+            currentCard.GetComponent<SortingGroup>().sortingOrder = i;
         }
     }
 }
