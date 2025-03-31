@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
+// 设置执行优先级，数字越小越优先执行
+[DefaultExecutionOrder(-100)]
 public class PoolTool : MonoBehaviour
 {
     public GameObject objPrefab;
     private ObjectPool<GameObject> pool;
 
-    private void Start()
+    private void Awake()
     {
         // 创建对象池
         pool = new ObjectPool<GameObject>(
