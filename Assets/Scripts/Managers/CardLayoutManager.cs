@@ -5,7 +5,8 @@ using UnityEngine;
 public class CardLayoutManager : MonoBehaviour
 {
     // public bool isHorizontal = false;
-    public float maxWidth = 7f;
+    public float maxHorizontalWidth = 7f;
+    public float maxSectorWidth = 10f;
     public float cardSpacing = 2f;
     public float horizontalCenterY = -4.5f;
     public float sectorCenterY = -21.5f;
@@ -53,11 +54,27 @@ public class CardLayoutManager : MonoBehaviour
         centerPosition = Vector3.up * sectorCenterY;
 
         // 计算总的角度变化
-        float cardAngle = (numberOfCards - 1) * angleBetweenCards / 2;
+        // float cardAngle = (numberOfCards - 1) * angleBetweenCards / 2;
+        // float totalAlgle = Mathf.Min(maxSectorWidth / 2, cardAngle);
+
+        // for (int i = 0; i < numberOfCards; i++)
+        // {
+        //     var deltaAngle = cardAngle -  i * angleBetweenCards;
+        //     var pos = SectorCardPositon(deltaAngle);
+        //     var rotation = Quaternion.Euler(0, 0, deltaAngle);
+
+        //     cardPositionList.Add(pos);
+        //     cardRotationList.Add(rotation);
+        // }
+        // 总展开角度计算
+        float cardAngle = (numberOfCards - 1) * angleBetweenCards;
+        // 限制角度
+        float totalAlgle = Mathf.Min(maxSectorWidth, cardAngle);
+        float deltaSpaceAngle = totalAlgle > 0 ? totalAlgle / (numberOfCards - 1) : 0;
 
         for (int i = 0; i < numberOfCards; i++)
         {
-            var deltaAngle = cardAngle -  i * angleBetweenCards;
+            var deltaAngle = totalAlgle / 2 -  i * deltaSpaceAngle;
             var pos = SectorCardPositon(deltaAngle);
             var rotation = Quaternion.Euler(0, 0, deltaAngle);
 
@@ -71,14 +88,14 @@ public class CardLayoutManager : MonoBehaviour
         centerPosition = Vector3.up * horizontalCenterY;
 
         float currentWidth = cardSpacing * (numberOfCards - 1);
-        float totalWidtrh = MathF.Min(maxWidth, currentWidth);
+        float totalWidth = Mathf.Min(maxHorizontalWidth, currentWidth);
 
         // 计算每张牌之间的间隙
-        float currentSpacing = totalWidtrh > 0 ? totalWidtrh / (numberOfCards - 1) : 0;
+        float currentSpacing = totalWidth > 0 ? totalWidth / (numberOfCards - 1) : 0;
 
         for (int i = 0; i < numberOfCards; i++)
         {
-            float x = -totalWidtrh / 2 + i * currentSpacing;
+            float x = -totalWidth / 2 + i * currentSpacing;
             var pos = new Vector3(x, centerPosition.y, 0);
             var rotation = Quaternion.identity;
 

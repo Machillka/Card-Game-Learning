@@ -19,7 +19,7 @@ public class CardDeck : MonoBehaviour
     private void Start()
     {
         InitializeDeck();
-        DrawCard(3);
+        DrawCard(10);
     }
 
     public void InitializeDeck()

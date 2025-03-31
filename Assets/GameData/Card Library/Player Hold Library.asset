@@ -13,10 +13,4 @@ MonoBehaviour:
   m_Name: Player Hold Library
   m_EditorClassIdentifier: 
   description: "\u6E38\u620F\u8FDB\u884C\u65F6\uFF0C\u73A9\u5BB6\u7684\u5361\u724C"
-  cardLibraryList:
-  - cardData: {fileID: 11400000, guid: 23e9d2dae3552214cbf9fd4f7364acbf, type: 2}
-    amount: 3
-  - cardData: {fileID: 11400000, guid: 6ca32e7f422a18349bb860e30fdc3096, type: 2}
-    amount: 3
-  - cardData: {fileID: 11400000, guid: 19c70ab8cbcfb584281682f0779b6757, type: 2}
-    amount: 1
+  cardLibraryList: []
