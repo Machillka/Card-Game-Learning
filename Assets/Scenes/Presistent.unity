@@ -148,9 +148,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5730d66c379d04547a0f8e0882b5fe24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWidth: 7
+  maxHorizontalWidth: 10
+  maxSectorWidth: 40
   cardSpacing: 2
-  centerPosition: {x: 0, y: -4.5, z: 0}
+  horizontalCenterY: -4.5
+  sectorCenterY: -21.5
+  angleBetweenCards: 7
+  radius: 17
 --- !u!4 &19749085
 Transform:
   m_ObjectHideFlags: 0
@@ -396,6 +400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardManager: {fileID: 1890654180}
   cardLayoutManager: {fileID: 19749084}
+  deckPosition: {x: 0, y: 0, z: 0}
+  motionDelay: 0.2
+  isHorizontal: 1
 --- !u!4 &544861349
 Transform:
   m_ObjectHideFlags: 0
