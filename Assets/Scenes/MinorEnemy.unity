@@ -216,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 60
   hp: {fileID: 11400000, guid: 5d318e3fe07438e41873eb594790451a, type: 2}
+  isDead: 0
 --- !u!114 &185912084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +538,7 @@ Transform:
   m_GameObject: {fileID: 810060409}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 3.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
