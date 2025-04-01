@@ -9,7 +9,7 @@ public class CharacterBase : MonoBehaviour
     public int CurrentHP { get => hp.currentValue; set => hp.SetValue(value); }
     public int MaxHP { get => hp.maxValue; }
 
-    private bool isDead = false;
+    public bool isDead = false;
 
     protected Animator animator;
 
