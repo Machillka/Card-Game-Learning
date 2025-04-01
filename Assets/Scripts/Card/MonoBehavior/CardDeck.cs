@@ -35,6 +35,7 @@ public class CardDeck : MonoBehaviour
         }
 
         //TODO: 洗牌 更新弃牌堆|抽牌堆的数字
+        ShuffleDeck();
     }
 
     [ContextMenu("DrawCard")]
@@ -53,12 +54,18 @@ public class CardDeck : MonoBehaviour
 
         for (int i = 0; i < amount; i++)
         {
-            if (drawDeck.Count == 0)
-            {
-                //TODO: 洗牌 更新弃牌堆|抽牌堆的数字
-            }
             CardDataSO currentCardData = drawDeck[0];
             drawDeck.RemoveAt(0);
+            if (drawDeck.Count == 0)
+            {
+                // TODO: 洗牌 更新弃牌堆|抽牌堆的数字
+                foreach (var item in discardDeck)
+                {
+                    drawDeck.Add(item);
+                }
+                ShuffleDeck();
+            }
+
             Card card = cardManager.GetCardObject().GetComponent<Card>();
             card.Init(currentCardData);
             card.transform.position = deckPosition;
@@ -70,12 +77,16 @@ public class CardDeck : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 设置卡牌位置
+    /// </summary>
+    /// <param name="delatTime">动画延迟事件</param>
     private void SetCardLayout(float delatTime)
     {
         for (int i = 0; i < handCardList.Count; i++)
         {
             Card currentCard = handCardList[i];
-            //TODO: 化简重复计算部分
+            // TODO: 化简重复计算部分
             CardTransform cardTransform = cardLayoutManager.GetCardTransform(i, handCardList.Count, isHorizontal);
             // currentCard.transform.SetPositionAndRotation(cardTransform.position, cardTransform.rotation);
             // 放大后开始移动;
@@ -91,5 +102,29 @@ public class CardDeck : MonoBehaviour
             // 更新卡牌数据
             currentCard.UpdatePositionRotation(cardTransform.position, cardTransform.rotation);
         }
+    }
+    /// <summary>
+    /// 洗牌
+    /// </summary>
+    private void ShuffleDeck()
+    {
+        discardDeck.Clear();
+        //TODO: 显示UI
+
+        for (int i = 0; i < drawDeck.Count; i++)
+        {
+            CardDataSO temp = drawDeck[i];
+            int shuffleIndex = Random.Range(i, drawDeck.Count);
+            drawDeck[i] = drawDeck[shuffleIndex];
+            drawDeck[shuffleIndex] = temp;
+        }
+    }
+
+    public void DiscardCard(Card card)
+    {
+        discardDeck.Add(card.cardData);
+        handCardList.Remove(card);
+        cardManager.DiscardCardObject(card.gameObject);
+        SetCardLayout(0f);
     }
 }
