@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,6 +11,8 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private bool canMove;
     private bool canExecute;
 
+    private CharacterBase targetCharacter;
+
     private void Awake()
     {
         currentCard = GetComponent<Card>();
@@ -20,7 +23,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         switch (currentCard.cardData.cardType)
         {
             case CardType.Attack:
-                Debug.Log("Line");
+                canMove = false;
                 currentArrow = Instantiate(arrowPrefab, transform.position, Quaternion.identity);
                 break;
             case CardType.Defense:
@@ -37,10 +40,23 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             currentCard.isAnimating = true;
             Vector3 screenPos = new(Input.mousePosition.x, Input.mousePosition.y, 10);
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-            Debug.Log("CanMovePosition" + worldPos);
             currentCard.transform.position = worldPos;
 
             canExecute = worldPos.y > 1f;
+        }
+        else
+        {
+            if(eventData.pointerEnter == null)
+                return;
+            if (eventData.pointerEnter.CompareTag("Enemy"))
+            {
+                Debug.Log("Find Enemy");
+                canExecute = true;
+                targetCharacter = eventData.pointerEnter.GetComponent<CharacterBase>();
+                return;
+            }
+            canExecute = false;
+            targetCharacter = null;
         }
     }
 
@@ -50,8 +66,14 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             Destroy(currentArrow);
         }
-
-        currentCard.ResetCardTransform();
-        currentCard.isAnimating = false;
+        if (canExecute)
+        {
+            currentCard.ExcuteCardEffects(currentCard.player, targetCharacter);
+        }
+        else
+        {
+            currentCard.ResetCardTransform();
+            currentCard.isAnimating = false;
+        }
     }
 }

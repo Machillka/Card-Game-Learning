@@ -19,6 +19,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Quaternion originalRotation;
     public int originalLayerOrder;
 
+    public Player player;
+
+    [Header("广播事件")]
+    public ObjectEventSO discardCardEvent;
+
     private void Start()
     {
         Init(cardData);
@@ -40,6 +45,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             _ => throw new System.NotImplementedException(),
         };
         */
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     public void UpdatePositionRotation(Vector3 position, Quaternion rotation)
@@ -73,5 +79,15 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         transform.SetPositionAndRotation(originalPosition, originalRotation);
         GetComponent<SortingGroup>().sortingOrder = originalLayerOrder;
+    }
+
+    public void ExcuteCardEffects(CharacterBase from, CharacterBase target)
+    {
+        //TODO: 回收卡牌和cost减少
+        discardCardEvent.RaiseEvent(this, this);
+        foreach (var effect in cardData.effects)
+        {
+            effect.Excute(from, target);
+        }
     }
 }

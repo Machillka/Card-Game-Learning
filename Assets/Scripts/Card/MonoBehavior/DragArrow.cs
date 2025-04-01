@@ -17,10 +17,9 @@ public class DragArrow : MonoBehaviour
     private void Update()
     {
         mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
-        Debug.Log("Updating Line");
         SetArrowPosition();
     }
-    //TODO: 箭头结束位置不在鼠标位置
+    //TODO: 箭头结束位置不在鼠标位置 思考材质的参数意义
     public void SetArrowPosition()
     {
         Vector3 cardPosition = transform.position; // 卡牌位置

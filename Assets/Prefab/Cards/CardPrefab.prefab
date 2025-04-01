@@ -306,9 +306,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2156473676280733819}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1685486661
+  m_SortingLayer: 3
+  m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!61 &63431189782350813
 BoxCollider2D:
@@ -377,6 +377,8 @@ MonoBehaviour:
   originalPosition: {x: 0, y: 0, z: 0}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   originalLayerOrder: 0
+  player: {fileID: 0}
+  discardCardEvent: {fileID: 11400000, guid: f8832e7cb3290e743a38745b8084965e, type: 2}
 --- !u!114 &-1816855258153501993
 MonoBehaviour:
   m_ObjectHideFlags: 0

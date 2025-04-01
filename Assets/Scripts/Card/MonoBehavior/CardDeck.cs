@@ -19,7 +19,7 @@ public class CardDeck : MonoBehaviour
     private void Start()
     {
         InitializeDeck();
-        DrawCard(10);
+        DrawCard(5);
     }
 
     public void InitializeDeck()
@@ -46,11 +46,11 @@ public class CardDeck : MonoBehaviour
 
     private void DrawCard(int amount)
     {
-        if (amount > drawDeck.Count)
-        {
-            Debug.LogError("DrawCard amount is more than drawDeck count");
-            return;
-        }
+        // if (amount > drawDeck.Count)
+        // {
+        //     Debug.LogError("DrawCard amount is more than drawDeck count");
+        //     return;
+        // }
 
         for (int i = 0; i < amount; i++)
         {
@@ -120,8 +120,9 @@ public class CardDeck : MonoBehaviour
         }
     }
 
-    public void DiscardCard(Card card)
+    public void DiscardCard(object obj)
     {
+        Card card = obj as Card;
         discardDeck.Add(card.cardData);
         handCardList.Remove(card);
         cardManager.DiscardCardObject(card.gameObject);
