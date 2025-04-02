@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48ace4a88e37e794cb09beaeb9ded033, type: 3}
-  m_Name: Enemy HP
+  m_Script: {fileID: 11500000, guid: 1229ac83eb4cff346ac7fb9b9a85e819, type: 3}
+  m_Name: EnemyTurnEnd
   m_EditorClassIdentifier: 
-  maxValue: 60
-  currentValue: 28
-  valueChangeEvent: {fileID: 11400000, guid: c7f4b5cf8a78e0e4899fe55cd0ed5c58, type: 2}
-  description: 
+  description: "\u654C\u4EBA\u56DE\u5408\u7ED3\u675F"
+  lastSender: 

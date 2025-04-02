@@ -16,10 +16,19 @@ public class CardDeck : MonoBehaviour
     private List<CardDataSO> discardDeck = new List<CardDataSO>();          // 弃牌堆
     private List<Card> handCardList = new List<Card>();                     // 当前手牌
 
+    [Header("事件广播")]
+    public IntEventSO drawCountEvent;
+    public IntEventSO discardCountEvent;
+
     private void Start()
     {
         InitializeDeck();
-        DrawCard(5);
+        // DrawCard(5);
+    }
+
+    public void NewTurnDrawCards()
+    {
+        DrawCard(4);
     }
 
     public void InitializeDeck()
@@ -46,16 +55,8 @@ public class CardDeck : MonoBehaviour
 
     private void DrawCard(int amount)
     {
-        // if (amount > drawDeck.Count)
-        // {
-        //     Debug.LogError("DrawCard amount is more than drawDeck count");
-        //     return;
-        // }
-
         for (int i = 0; i < amount; i++)
         {
-            CardDataSO currentCardData = drawDeck[0];
-            drawDeck.RemoveAt(0);
             if (drawDeck.Count == 0)
             {
                 // TODO: 洗牌 更新弃牌堆|抽牌堆的数字
@@ -65,6 +66,12 @@ public class CardDeck : MonoBehaviour
                 }
                 ShuffleDeck();
             }
+
+            CardDataSO currentCardData = drawDeck[0];
+            drawDeck.RemoveAt(0);
+
+            // 更新UI 抽牌堆减少
+            drawCountEvent.RaiseEvent(drawDeck.Count, this);
 
             Card card = cardManager.GetCardObject().GetComponent<Card>();
             card.Init(currentCardData);
@@ -110,6 +117,8 @@ public class CardDeck : MonoBehaviour
     {
         discardDeck.Clear();
         //TODO: 显示UI
+        drawCountEvent.RaiseEvent(drawDeck.Count, this);
+        discardCountEvent.RaiseEvent(discardDeck.Count, this);
 
         for (int i = 0; i < drawDeck.Count; i++)
         {
@@ -126,6 +135,32 @@ public class CardDeck : MonoBehaviour
         discardDeck.Add(card.cardData);
         handCardList.Remove(card);
         cardManager.DiscardCardObject(card.gameObject);
+
+        discardCountEvent.RaiseEvent(discardDeck.Count, this);
+
         SetCardLayout(0f);
+    }
+
+    [ContextMenu("TestUI")]
+    public void Test()
+    {
+        drawCountEvent.RaiseEvent(100, this);
+        discardCountEvent.RaiseEvent(114, this);
+    }
+
+    /// <summary>
+    /// 玩家回合结束，回收卡牌
+    /// </summary>
+    public void OnPlayerTurnEnd()
+    {
+        foreach (var card in handCardList)
+        {
+            // DiscardCard(card);
+            discardDeck.Add(card.cardData);
+            cardManager.DiscardCardObject(card.gameObject);
+        }
+
+        handCardList.Clear();
+        discardCountEvent.RaiseEvent(discardDeck.Count, this);
     }
 }

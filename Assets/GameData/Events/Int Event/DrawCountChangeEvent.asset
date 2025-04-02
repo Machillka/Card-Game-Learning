@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48ace4a88e37e794cb09beaeb9ded033, type: 3}
-  m_Name: Enemy HP
+  m_Script: {fileID: 11500000, guid: 9f3ff78e50a81b643a1d0ae2a6763b2a, type: 3}
+  m_Name: DrawCountChangeEvent
   m_EditorClassIdentifier: 
-  maxValue: 60
-  currentValue: 28
-  valueChangeEvent: {fileID: 11400000, guid: c7f4b5cf8a78e0e4899fe55cd0ed5c58, type: 2}
-  description: 
+  description: "\u62BD\u724C\u6570\u91CF\u53D8\u5316\u4E8B\u4EF6\uFF0C\u901A\u77E5UI"
+  lastSender: Card Deck (CardDeck)

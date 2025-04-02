@@ -15,9 +15,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        Debug.Log("UpdateMapLayoutData: " + roomVector);
         var currentRoom = mapLayout.mapRoomDataList.Find(room => room.column == roomVector.x && room.line == roomVector.y);
-        Debug.Log("currentRoom: " + currentRoom);
         currentRoom.roomState = RoomState.Visited;
 
         var sameColumnRooms = mapLayout.mapRoomDataList.FindAll(room => room.column == roomVector.x);

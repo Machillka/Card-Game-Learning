@@ -12,7 +12,6 @@ public class DamageEffect : Effect
             case EffectTargetType.Target:
                 //TODO: 计算伤害
                 target.TakeDamage(value);
-                Debug.Log($"执行了{value}点伤害");
                 break;
             case EffectTargetType.All:
                 //TODO: 实现特定几个敌人的攻击

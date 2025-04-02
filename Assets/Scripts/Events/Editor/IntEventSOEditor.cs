@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(ObjectEventSO))]
+[CustomEditor(typeof(IntEventSO))]
 public class IntEventSOEditor : BaseEventSOEditor<int>
 {
 }

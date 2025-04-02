@@ -40,7 +40,6 @@ public class CardLayoutManager : MonoBehaviour
 
         if (index < 0 || index >= cardPositionList.Count)
         {
-            Debug.LogError("GetCardTransform index out of range");
             return null;
         }
 

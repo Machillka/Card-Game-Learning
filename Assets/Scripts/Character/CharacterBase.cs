@@ -23,7 +23,6 @@ public class CharacterBase : MonoBehaviour
         hp.maxValue = maxHP;
         hp.currentValue = maxHP;
         CurrentHP = MaxHP;
-        Debug.Log("StartHP:"+CurrentHP);
     }
 
     public void TakeDamage(int damage)
@@ -31,7 +30,6 @@ public class CharacterBase : MonoBehaviour
         if (CurrentHP > damage)
         {
             CurrentHP -= damage;
-            Debug.Log("CurrentHP" + CurrentHP);
         }
         else
         {

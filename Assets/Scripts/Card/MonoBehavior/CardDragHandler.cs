@@ -18,6 +18,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         currentCard = GetComponent<Card>();
     }
 
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         switch (currentCard.cardData.cardType)
@@ -50,7 +51,6 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 return;
             if (eventData.pointerEnter.CompareTag("Enemy"))
             {
-                Debug.Log("Find Enemy");
                 canExecute = true;
                 targetCharacter = eventData.pointerEnter.GetComponent<CharacterBase>();
                 return;
@@ -69,6 +69,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (canExecute)
         {
             currentCard.ExcuteCardEffects(currentCard.player, targetCharacter);
+            canExecute = false;
         }
         else
         {
