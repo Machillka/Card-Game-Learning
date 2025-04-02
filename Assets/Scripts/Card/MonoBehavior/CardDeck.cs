@@ -6,6 +6,8 @@ using DG.Tweening;
 
 public class CardDeck : MonoBehaviour
 {
+    public Player player; //TODO: 重新实现卡牌是否可以打出方法，在绘制卡牌的时候把不能打出的卡牌设置成灰色
+
     public CardManager cardManager;
     public CardLayoutManager cardLayoutManager;
     public Vector3 deckPosition;                                            // 抽牌出现的位置

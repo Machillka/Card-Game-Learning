@@ -379,6 +379,7 @@ MonoBehaviour:
   originalLayerOrder: 0
   player: {fileID: 0}
   discardCardEvent: {fileID: 11400000, guid: f8832e7cb3290e743a38745b8084965e, type: 2}
+  costEvent: {fileID: 11400000, guid: e5baf9cc369e78d42838c7120498efc2, type: 2}
 --- !u!114 &-1816855258153501993
 MonoBehaviour:
   m_ObjectHideFlags: 0

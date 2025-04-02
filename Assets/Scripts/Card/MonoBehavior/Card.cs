@@ -23,6 +23,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     [Header("广播事件")]
     public ObjectEventSO discardCardEvent;
+    public IntEventSO costEvent;
 
     private void Start()
     {
@@ -84,6 +85,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void ExcuteCardEffects(CharacterBase from, CharacterBase target)
     {
         //TODO: 回收卡牌和cost减少
+        costEvent.RaiseEvent(cardData.cardCost, this);
         discardCardEvent.RaiseEvent(this, this);
         foreach (var effect in cardData.effects)
         {

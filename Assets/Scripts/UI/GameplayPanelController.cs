@@ -24,9 +24,9 @@ public class GameplayPanelController : MonoBehaviour
 
         endTurnButton.clicked += OnEndPlayerTurn;
 
-        energyAmountLabel.text = "666";
-        discardAmountLabel.text = "666";
-        drawAmountLabel.text = "666";
+        energyAmountLabel.text = "0";
+        discardAmountLabel.text = "0";
+        drawAmountLabel.text = "0";
         turnLabel.text = "游戏开始";
     }
 
@@ -40,8 +40,27 @@ public class GameplayPanelController : MonoBehaviour
         discardAmountLabel.text = value.ToString();
     }
 
+    public void UpdateEnergyAmount(int value)
+    {
+        energyAmountLabel.text = value.ToString();
+    }
+
     private void OnEndPlayerTurn()
     {
         playerTurnEndEvent.RaiseEvent(null, this);
+    }
+
+    public void OnEnemyTurnBegin()
+    {
+        endTurnButton.SetEnabled(false);
+        turnLabel.text = "敌方回合";
+        turnLabel.style.color = new StyleColor(Color.red);
+    }
+
+    public void OnPlayerTurnBegin()
+    {
+        endTurnButton.SetEnabled(true);
+        turnLabel.text = "玩家回合";
+        turnLabel.style.color = new StyleColor(Color.white);
     }
 }
