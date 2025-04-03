@@ -5,7 +5,11 @@ public class GameplayPanelController : MonoBehaviour
 {
     private VisualElement rootElement;
 
-    private Label energyAmountLabel, drawAmountLabel, discardAmountLabel, turnLabel;
+    [Header("UI Elements")]
+    private Label energyAmountLabel;
+    private Label drawAmountLabel;
+    private Label discardAmountLabel;
+    private Label turnLabel;
     private Button endTurnButton;
 
     [Header("广播事件")]

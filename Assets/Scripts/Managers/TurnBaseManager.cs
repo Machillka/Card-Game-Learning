@@ -30,7 +30,8 @@ public class TurnBaseManager : MonoBehaviour
             if (timeCounter >= enemyTurnDuration)
             {
                 timeCounter = 0f;
-                //TODO: 敌人回合结束 玩家回合开始
+                //TODO: 敌人回合结束
+                EnemyTurnEnd();
                 isPlayerTurn = true;
             }
         }
@@ -42,7 +43,7 @@ public class TurnBaseManager : MonoBehaviour
             if (timeCounter >= playerTurnDuration)
             {
                 timeCounter = 0f;
-                //TODO: 玩家回合开始
+                //TODO: 玩家回合结束 敌人回合开始
                 PlayerTurnBegin();
                 isPlayerTurn = false;
             }

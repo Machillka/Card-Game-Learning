@@ -33,8 +33,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - CardData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e07e8a9d9504bb4fab10c6af9dc627a
+    m_Address: LevelUpper
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ca32e7f422a18349bb860e30fdc3096
     m_Address: SwordAttack
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b841b0f768561941b93bdf0e2b1034a
+    m_Address: ImageBreaker
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0e8d04c6457842408c2ef4a65875156
+    m_Address: RecoverApple
     m_ReadOnly: 0
     m_SerializedLabels:
     - CardData

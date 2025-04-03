@@ -18,9 +18,11 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         currentCard = GetComponent<Card>();
     }
 
-
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!currentCard.isAvaliable)
+            return;
+
         switch (currentCard.cardData.cardType)
         {
             case CardType.Attack:
@@ -36,6 +38,9 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!currentCard.isAvaliable)
+            return;
+
         if (canMove)
         {
             currentCard.isAnimating = true;
@@ -62,6 +67,9 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!currentCard.isAvaliable)
+            return;
+
         if (currentArrow != null)
         {
             Destroy(currentArrow);

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Effect", menuName = "Card Effect/Damage Effect")]
+[CreateAssetMenu(fileName = "DamageEffect", menuName = "Card Effect/Damage Effect")]
 public class DamageEffect : Effect
 {
     public override void Excute(CharacterBase from, CharacterBase target)

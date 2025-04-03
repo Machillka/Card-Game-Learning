@@ -6,8 +6,6 @@ using DG.Tweening;
 
 public class CardDeck : MonoBehaviour
 {
-    public Player player; //TODO: 重新实现卡牌是否可以打出方法，在绘制卡牌的时候把不能打出的卡牌设置成灰色
-
     public CardManager cardManager;
     public CardLayoutManager cardLayoutManager;
     public Vector3 deckPosition;                                            // 抽牌出现的位置
@@ -97,7 +95,11 @@ public class CardDeck : MonoBehaviour
             Card currentCard = handCardList[i];
             // TODO: 化简重复计算部分
             CardTransform cardTransform = cardLayoutManager.GetCardTransform(i, handCardList.Count, isHorizontal);
-            // currentCard.transform.SetPositionAndRotation(cardTransform.position, cardTransform.rotation);
+
+            // 卡牌能量判断
+            currentCard.UpdateCardState();
+            // currentCard.isAvaliable = cardCost <= player.CurrentMana;
+
             // 放大后开始移动;
             currentCard.isAnimating = true;
             currentCard.transform.DOScale(Vector3.one, 0.2f).SetDelay(delatTime).onComplete = () =>

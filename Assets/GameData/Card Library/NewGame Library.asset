@@ -15,8 +15,12 @@ MonoBehaviour:
   description: "\u521D\u59CB\u8FDB\u5165\u6E38\u620F\u65F6\uFF0C\u73A9\u5BB6\u6301\u6709\u7684\u5361\u724C"
   cardLibraryList:
   - cardData: {fileID: 11400000, guid: 23e9d2dae3552214cbf9fd4f7364acbf, type: 2}
-    amount: 3
+    amount: 2
   - cardData: {fileID: 11400000, guid: 6ca32e7f422a18349bb860e30fdc3096, type: 2}
     amount: 3
   - cardData: {fileID: 11400000, guid: 19c70ab8cbcfb584281682f0779b6757, type: 2}
+    amount: 1
+  - cardData: {fileID: 11400000, guid: b0e8d04c6457842408c2ef4a65875156, type: 2}
+    amount: 1
+  - cardData: {fileID: 11400000, guid: 4e07e8a9d9504bb4fab10c6af9dc627a, type: 2}
     amount: 1

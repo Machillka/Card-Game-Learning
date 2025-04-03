@@ -13,6 +13,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public CardDataSO cardData;
     public bool isAnimating = false;
+    public bool isAvaliable = false;
 
     [Header("原始数据")]
     public Vector3 originalPosition;
@@ -91,5 +92,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             effect.Excute(from, target);
         }
+    }
+
+    public void UpdateCardState()
+    {
+        Debug.Log($"Player Mana{player.CurrentMana}; Cost = {cardData.cardCost}");
+        isAvaliable = cardData.cardCost <= player.CurrentMana;
+        costText.color = isAvaliable ? Color.green : Color.red;
     }
 }
