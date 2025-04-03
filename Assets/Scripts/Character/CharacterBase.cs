@@ -23,9 +23,17 @@ public class CharacterBase : MonoBehaviour
     public float baseStrength = 1f;
     private float strengthEffect = 0.5f;
 
+    [Header("广播事件")]
+    public ObjectEventSO characterDeathEvent;
+
+    protected virtual void Update()
+    {
+        animator.SetBool("isDead", isDead);
+    }
+
     protected virtual void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     protected virtual void Start()
@@ -51,11 +59,13 @@ public class CharacterBase : MonoBehaviour
         if (CurrentHP > currentDamage)
         {
             CurrentHP -= currentDamage;
+            animator.SetTrigger("hit");
         }
         else
         {
             CurrentHP = 0;
             isDead = true;
+            characterDeathEvent.RaiseEvent(this, this);
         }
     }
 

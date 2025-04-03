@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StrengthEffecr", menuName = "Card Effect/Strength Effect")]
+[CreateAssetMenu(fileName = "StrengthEffet", menuName = "Card Effect/Strength Effect")]
 public class StrengthEffect : Effect
 {
     public override void Excute(CharacterBase from, CharacterBase target)

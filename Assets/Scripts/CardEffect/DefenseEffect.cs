@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefenseEffecr", menuName = "Card Effect/Defense Effect")]
+[CreateAssetMenu(fileName = "DefenseEffet", menuName = "Card Effect/Defense Effect")]
 public class DefenseEffect : Effect
 {
     public override void Excute(CharacterBase from, CharacterBase target)

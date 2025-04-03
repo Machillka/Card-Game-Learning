@@ -28,6 +28,8 @@ public class CardDeck : MonoBehaviour
 
     public void NewTurnDrawCards()
     {
+        //TODO: 应该是先回复cost 再抽牌 需要重新设置执行顺序
+        Debug.Log("DrawNewCards");
         DrawCard(4);
     }
 
@@ -48,12 +50,12 @@ public class CardDeck : MonoBehaviour
     }
 
     [ContextMenu("DrawCard")]
-    public void DrawCard()
+    public void DrawCardTest()
     {
         DrawCard(1);
     }
 
-    private void DrawCard(int amount)
+    public void DrawCard(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -167,4 +169,16 @@ public class CardDeck : MonoBehaviour
         handCardList.Clear();
         discardCountEvent.RaiseEvent(discardDeck.Count, this);
     }
+
+    public void ReleaseAllCards(object obj)
+    {
+        foreach (var card in handCardList)
+        {
+            cardManager.DiscardCardObject(card.gameObject);
+        }
+
+        handCardList.Clear();
+        InitializeDeck();
+    }
+
 }

@@ -132,6 +132,10 @@ GameObject:
   - component: {fileID: 185912082}
   - component: {fileID: 185912084}
   - component: {fileID: 185912085}
+  - component: {fileID: 185912086}
+  - component: {fileID: 185912087}
+  - component: {fileID: 185912088}
+  - component: {fileID: 185912089}
   m_Layer: 7
   m_Name: Minor Enemy
   m_TagString: Enemy
@@ -215,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7824e050fcbd84b8339ef15b850269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 60
+  maxHP: 10
   hp: {fileID: 11400000, guid: 5d318e3fe07438e41873eb594790451a, type: 2}
   defense: {fileID: 11400000, guid: 6ebe742de02c4db45b69982d8a50582b, type: 2}
   buffRound: {fileID: 11400000, guid: 8584f92b00779a442a0ad7f2156fc4b6, type: 2}
@@ -223,6 +227,11 @@ MonoBehaviour:
   buffAFX: {fileID: 890799208}
   debuffAFX: {fileID: 1379848701}
   baseStrength: 1
+  characterDeathEvent: {fileID: 11400000, guid: 6fb26d9acce74d1429d8f397dc54d52f, type: 2}
+  actionData: {fileID: 11400000, guid: b9b4a6f3fb4442e439af1da9015c11bf, type: 2}
+  currentAction:
+    sprite: {fileID: 0}
+    effect: {fileID: 0}
 --- !u!114 &185912084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +267,130 @@ MonoBehaviour:
   healthbarTransform: {fileID: 810060410}
   buffSprite: {fileID: 21300000, guid: 810448b82870c45058f8b2de5423274a, type: 3}
   debuffSprite: {fileID: 21300000, guid: d7f03361f8c0a4e1293a0b3eb59d0320, type: 3}
+--- !u!114 &185912086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185912079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2a1f1b4eb77c340b015ee963d4f74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: b0a4746d042360546921e3558bdf5b22, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 185912082}
+        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
+        m_MethodName: UpdateStrengthRoung
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &185912087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185912079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2a1f1b4eb77c340b015ee963d4f74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: b0a4746d042360546921e3558bdf5b22, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 185912082}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnPlayerTurnBegin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 185912085}
+        m_TargetAssemblyTypeName: HealthBarController, Assembly-CSharp
+        m_MethodName: SetIntentElement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &185912088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185912079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2a1f1b4eb77c340b015ee963d4f74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: e7c8ef847d0912045984c9113709cd3d, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 185912085}
+        m_TargetAssemblyTypeName: HealthBarController, Assembly-CSharp
+        m_MethodName: HideIntentElement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &185912089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185912079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2a1f1b4eb77c340b015ee963d4f74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: 2b3fd726afb413649a2a1044f7b7375b, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 185912082}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: OnEnemyTurnBegin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &514424958
 GameObject:
   m_ObjectHideFlags: 0

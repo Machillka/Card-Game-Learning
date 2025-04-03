@@ -21,7 +21,7 @@ public class PoolTool : MonoBehaviour
             maxSize: 20
         );
 
-        PreFillPool(10);
+        PreFillPool(15);
     }
 
     private void PreFillPool(int count)

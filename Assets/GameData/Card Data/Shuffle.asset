@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a53aa46705ba7a4ba5c8d51be86c2ff, type: 3}
-  m_Name: ImagineBreaker
+  m_Name: Shuffle
   m_EditorClassIdentifier: 
-  cardName: ImagineBreaker
-  cardImage: {fileID: 21300000, guid: 51e90e2f352d93d49b72bebce22d5c10, type: 3}
+  cardName: Shuffle
+  cardImage: {fileID: 21300000, guid: f1ec4da94f3fce84887017bd602a7b98, type: 3}
   cardCost: 2
-  cardType: 0
-  cardDescription: "\u7528\u6559\u4E3B\u7684\u53F3\u624B\u51CF\u5F31\u5730\u65B9\u653B\u51FB\u529B"
+  cardType: 2
+  cardDescription: "\u6D17\u6D17\u8111\u5B50 \u62BD\u724C"
   effects:
-  - {fileID: 11400000, guid: 605f7d412229eed47ad25f3eda24d19f, type: 2}
+  - {fileID: 11400000, guid: ff1844d51c37f5f41acb9f33a4c30180, type: 2}

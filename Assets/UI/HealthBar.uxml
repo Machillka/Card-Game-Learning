@@ -7,5 +7,8 @@
         <engine:VisualElement name="Buff" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Intents/buff_attack_up.png?fileID=2800000&amp;guid=810448b82870c45058f8b2de5423274a&amp;type=3#buff_attack_up&quot;); position: absolute; width: 42px; height: 50px; top: -10px; left: auto; align-self: center; justify-content: center; display: none; right: -40px;">
             <engine:Label text="6&#10;" name="BuffRound" style="flex-direction: column; -unity-text-align: middle-center; font-size: 30px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; display: flex; position: absolute; left: 35px;" />
         </engine:VisualElement>
+        <engine:VisualElement name="Intent" enabled="true" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/Intents/buff_attack_up.png?fileID=2800000&amp;guid=810448b82870c45058f8b2de5423274a&amp;type=3#buff_attack_up&quot;); position: absolute; width: 42px; height: 50px; top: -61px; left: auto; align-self: center; justify-content: center; display: none; right: 130px;">
+            <engine:Label text="6&#10;" name="IntentAmount" style="flex-direction: column; -unity-text-align: middle-center; font-size: 30px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; display: flex; position: absolute; left: 43px; top: 7px;" />
+        </engine:VisualElement>
     </engine:ProgressBar>
 </engine:UXML>

@@ -11,7 +11,14 @@ public class SceneLoadManager : MonoBehaviour
 
     [Header("广播")]
     public ObjectEventSO afterRoomLoadedEvent;
+    public ObjectEventSO updateRoomEvent;
 
+    private Room currentRoom;
+
+    private void Start()
+    {
+        currentRoomVector = Vector2Int.one * -1;
+    }
 
     /// <summary>
     /// 监听房间加载事件
@@ -19,8 +26,9 @@ public class SceneLoadManager : MonoBehaviour
     /// <param name="data"></param>
     public async void OnLoadRoomEvent(object data)
     {
-        if (data is Room currentRoom)
+        if (data is Room)
         {
+            currentRoom = data as Room;
             var currentData = currentRoom.roomData;
             currentRoomVector = new Vector2Int(currentRoom.column, currentRoom.line);
             // Debug.Log("Loading room: " + currentData.roomType);
@@ -31,7 +39,7 @@ public class SceneLoadManager : MonoBehaviour
         // 加载房间
         await LoadSceneTask();
 
-        afterRoomLoadedEvent.RaiseEvent(currentRoomVector, this);
+        afterRoomLoadedEvent.RaiseEvent(currentRoom, this);
     }
 
     private async Awaitable LoadSceneTask()
@@ -52,6 +60,11 @@ public class SceneLoadManager : MonoBehaviour
     public async void LoadMap()
     {
         await UnloadSceneTask();
+
+        if (currentRoomVector != Vector2Int.one * -1)
+        {
+            updateRoomEvent.RaiseEvent(currentRoomVector, this);
+        }
 
         currentScene = map;
 

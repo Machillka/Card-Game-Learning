@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,12 +19,18 @@ public class HealthBarController : MonoBehaviour
     public Sprite buffSprite;
     public Sprite debuffSprite;
 
+    private Enemy enemy;
+    private VisualElement intentRoot;
+    private Label intentAmount;
+
     private void Awake()
     {
         currentCharacter = GetComponent<CharacterBase>();
+        enemy = GetComponent<Enemy>();
         InitializeHealthBar();
     }
 
+    //TODO: 使用事件监听实现 Update
     private void Update()
     {
         UpdateHealthBar();
@@ -90,6 +97,34 @@ public class HealthBarController : MonoBehaviour
 
         defenseRoot.style.display = DisplayStyle.None;
         buffRoot.style.display = DisplayStyle.None;
+
+        intentRoot = healthBar.Q<VisualElement>("Intent");
+        intentAmount = intentRoot.Q<Label>("IntentAmount");
+
+        intentRoot.style.display = DisplayStyle.None;
     }
 
+    /// <summary>
+    /// 玩家回合开始时调用
+    /// </summary>
+    public void SetIntentElement()
+    {
+        intentRoot.style.display = DisplayStyle.Flex;
+        intentRoot.style.backgroundImage = new StyleBackground(enemy.currentAction.sprite);
+
+        // 判断是否攻击
+        var value = enemy.currentAction.effect.value;
+
+        if (enemy.currentAction.effect.GetType() == typeof(DamageEffect))
+        {
+            value = (int)math.round(enemy.currentAction.effect.value * enemy.baseStrength);
+        }
+
+        intentAmount.text = value.ToString();
+    }
+
+    public void HideIntentElement()
+    {
+        intentRoot.style.display = DisplayStyle.None;
+    }
 }

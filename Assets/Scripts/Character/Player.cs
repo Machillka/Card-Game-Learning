@@ -15,6 +15,7 @@ public class Player : CharacterBase
 
     public void NewTurn()
     {
+        Debug.Log("SetMana");
         CurrentMana = maxMana;
         //TODO: 重置其他状态
     }
