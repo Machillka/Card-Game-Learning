@@ -85,7 +85,7 @@ public class HealthBarController : MonoBehaviour
     }
 
     [ContextMenu("Set UI Position")]
-    private void InitializeHealthBar()
+    public void InitializeHealthBar()
     {
         healthBarDocument = GetComponent<UIDocument>();
         healthBar = healthBarDocument.rootVisualElement.Q<ProgressBar>("HealthBar");

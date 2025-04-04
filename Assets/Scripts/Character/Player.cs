@@ -30,6 +30,7 @@ public class Player : CharacterBase
 
     public void NewGame()
     {
+        Debug.Log($"Newgame, HP = {CurrentHP}");
         CurrentHP = MaxHP;
         isDead = false;
         buffRound.currentValue = 0;

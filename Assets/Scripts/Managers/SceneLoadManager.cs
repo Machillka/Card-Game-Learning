@@ -8,7 +8,11 @@ public class SceneLoadManager : MonoBehaviour
     private AssetReference currentScene;
     public AssetReference map;
     public AssetReference menu;
+    public AssetReference intro;
+
     private Vector2Int currentRoomVector;
+
+    public FadePanel fadePanel;
 
     [Header("广播")]
     public ObjectEventSO afterRoomLoadedEvent;
@@ -16,10 +20,11 @@ public class SceneLoadManager : MonoBehaviour
 
     private Room currentRoom;
 
-    private void Start()
+    private void Awake()
     {
         currentRoomVector = Vector2Int.one * -1;
-        LoadMenu();
+        // LoadMenu();
+        LoadIntro();
     }
 
     /// <summary>
@@ -50,13 +55,16 @@ public class SceneLoadManager : MonoBehaviour
         await s.Task;
         if (s.Status == AsyncOperationStatus.Succeeded)
         {
+            fadePanel.FadeOut(0.2f);
             SceneManager.SetActiveScene(s.Result.Scene);
         }
     }
 
     private async Awaitable UnloadSceneTask()
     {
-        await SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        fadePanel.FadeIn(0.4f);
+        await Awaitable.WaitForSecondsAsync(0.45f);
+        await Awaitable.FromAsyncOperation(SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene()));
     }
 
     public async void LoadMap()
@@ -81,6 +89,18 @@ public class SceneLoadManager : MonoBehaviour
             await UnloadSceneTask();
 
         currentScene = menu;
+
+        await LoadSceneTask();
+    }
+
+    public async void LoadIntro()
+    {
+
+        // 表示第一次加载
+        if(currentScene != null)
+            await UnloadSceneTask();
+
+        currentScene = intro;
 
         await LoadSceneTask();
     }
