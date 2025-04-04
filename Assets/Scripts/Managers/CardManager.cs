@@ -12,6 +12,9 @@ public class CardManager : MonoBehaviour
     public CardLibrarySO newGameCardLibrary;        // 新游戏的卡牌库
     public CardLibrarySO currnetCardLibrary;        // 当前玩家的卡牌库
 
+    private int previousIndex = -1; // 上一次抽到的卡牌索引
+    private int randomIndex = 0;    // 当前抽到的卡牌索引
+
     private void Awake()
     {
         InitializeCardDataList();
@@ -68,5 +71,53 @@ public class CardManager : MonoBehaviour
     public void DiscardCardObject(GameObject cardObj)
     {
         poolTool.ReleaseObjectToPool(cardObj);
+    }
+
+    public CardDataSO GetNewCardData()
+    {
+        //TODO: 优化不重复抽卡逻辑
+        do
+        {
+            randomIndex = Random.Range(0, cardDataList.Count);
+            // Debug.Log($"抽到的卡牌索引: {randomIndex}");
+            // Debug.Log($"抽到的卡牌名称: {cardDataList[randomIndex].cardName}");
+            // Debug.Log($"抽到的卡牌类型: {cardDataList[randomIndex].cardType}");
+        }
+        while (previousIndex == randomIndex);
+        previousIndex = randomIndex;
+
+        return cardDataList[randomIndex];
+    }
+
+    // 通关获得新卡牌
+    public void UnlockCard(CardDataSO newCardData)
+    {
+        var newCard = new CardLibraryEntry
+        {
+            cardData = newCardData,
+            amount = 1,
+        };
+
+        if (currnetCardLibrary.cardLibraryList.Contains(newCard))
+        {
+            // 如果已经拥有这张卡牌，则增加数量
+            // var index = currnetCardLibrary.cardLibraryList.IndexOf(newCard);
+            // currnetCardLibrary.cardLibraryList[index].amount++;
+
+            var target = currnetCardLibrary.cardLibraryList.Find(x => x.cardData == newCardData);
+            if (target != null)
+            {
+                target.amount++;
+            }
+            else
+            {
+                Debug.LogError("找不到目标卡牌");
+            }
+        }
+        else
+        {
+            // 如果没有这张卡牌，则添加到卡牌库
+            currnetCardLibrary.cardLibraryList.Add(newCard);
+        }
     }
 }

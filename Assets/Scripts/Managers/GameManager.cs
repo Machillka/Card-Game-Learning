@@ -23,6 +23,12 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+
+        if (mapLayout.mapRoomDataList.Count == 0)
+        {
+            return;
+        }
+
         var currentRoom = mapLayout.mapRoomDataList.Find(room => room.column == roomVector.x && room.line == roomVector.y);
         currentRoom.roomState = RoomState.Visited;
 
@@ -79,5 +85,11 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(deltaTime);
         eventSO.RaiseEvent(null, this);
+    }
+
+    public void OnNewGameEvent()
+    {
+        mapLayout.mapRoomDataList.Clear();
+        mapLayout.linePositionList.Clear();
     }
 }

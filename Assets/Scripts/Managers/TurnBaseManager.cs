@@ -102,9 +102,14 @@ public class TurnBaseManager : MonoBehaviour
         }
     }
 
-    public void OnLoadMapEvent(object obj)
+    public void StopTurnBaseManager(object obj)
     {
         battleEnd = true;
         playerObj.SetActive(false);
+    }
+
+    public void NewGame()
+    {
+        playerObj.GetComponent<Player>().NewGame();
     }
 }

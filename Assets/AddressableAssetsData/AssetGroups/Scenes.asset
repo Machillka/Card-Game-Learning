@@ -15,11 +15,6 @@ MonoBehaviour:
   m_GroupName: Scenes
   m_GUID: 05a9d43152a55ec4e83ce80ae895de78
   m_SerializeEntries:
-  - m_GUID: 0f66e69e5ca8c834f9691c31dc0862ad
-    m_Address: Assets/GameData/Card Data/Shuffle.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1841efa8f19ad864bac970060c0682c3
     m_Address: Restroom
     m_ReadOnly: 0
@@ -32,6 +27,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 82906beef0950c24c9e1c82c369c1647
     m_Address: MinorEnemy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83349a91cae72c54f80eb2e326e56fa6
+    m_Address: Menu
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

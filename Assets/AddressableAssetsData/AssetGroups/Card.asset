@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Card
   m_GUID: c50e61c9a6d94b341b588a7fe0d38d4d
   m_SerializeEntries:
+  - m_GUID: 0f66e69e5ca8c834f9691c31dc0862ad
+    m_Address: Shuffle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - CardData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 19c70ab8cbcfb584281682f0779b6757
     m_Address: MagicSpell
     m_ReadOnly: 0

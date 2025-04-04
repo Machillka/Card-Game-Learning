@@ -7,6 +7,7 @@ public class SceneLoadManager : MonoBehaviour
 {
     private AssetReference currentScene;
     public AssetReference map;
+    public AssetReference menu;
     private Vector2Int currentRoomVector;
 
     [Header("广播")]
@@ -18,6 +19,7 @@ public class SceneLoadManager : MonoBehaviour
     private void Start()
     {
         currentRoomVector = Vector2Int.one * -1;
+        LoadMenu();
     }
 
     /// <summary>
@@ -67,6 +69,18 @@ public class SceneLoadManager : MonoBehaviour
         }
 
         currentScene = map;
+
+        await LoadSceneTask();
+    }
+
+    public async void LoadMenu()
+    {
+
+        // 表示第一次加载
+        if(currentScene != null)
+            await UnloadSceneTask();
+
+        currentScene = menu;
 
         await LoadSceneTask();
     }
