@@ -54,6 +54,7 @@ public class UIManager : MonoBehaviour
     {
         // HiddAllPanels();
         pickCardPanel.SetActive(true);
+        Debug.Log("OnPickCardEvent");
     }
 
     public void OnFinishPickCardEvent()

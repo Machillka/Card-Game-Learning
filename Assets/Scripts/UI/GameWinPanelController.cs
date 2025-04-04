@@ -14,7 +14,7 @@ public class GameWinPanelController : MonoBehaviour
     public ObjectEventSO pickCardEvent;
 
 
-    private void Awake()
+    private void OnEnable()
     {
         rootElement = GetComponent<UIDocument>().rootVisualElement;
         pickCardButton = rootElement.Q<Button>("PickCardButton");

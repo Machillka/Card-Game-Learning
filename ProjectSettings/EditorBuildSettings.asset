@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Presistent.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Boot.unity
+    guid: d43bbde6e76c03b418b3c9bc1e3d767b
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: a56c0c096b1fe0546a6e32bb32b6e793, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

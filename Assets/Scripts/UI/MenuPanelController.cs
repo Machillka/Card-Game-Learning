@@ -19,7 +19,11 @@ public class MenuPanelController : MonoBehaviour
         quitButton.clicked += OnQuitButtonClicked;
     }
 
+#if UNITY_EDITOR
+    private void OnQuitButtonClicked() => UnityEditor.EditorApplication.isPlaying = false;
+#else
     private void OnQuitButtonClicked() => Application.Quit();
+#endif
 
     private void OnNewGameButtonClicked()
     {

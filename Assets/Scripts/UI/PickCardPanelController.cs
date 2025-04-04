@@ -21,9 +21,9 @@ public class PickCardPanelController : MonoBehaviour
 
     private void OnEnable()
     {
-        rootElement = GetComponent<UIDocument>().rootVisualElement;
+        rootElement = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("Panel");
         cardContainer = rootElement.Q<VisualElement>("Container");
-        comfirmButton = rootElement.Q<Button>("ComfirmButton");
+        comfirmButton = rootElement.Q<Button>("ConfirmButton");
 
         comfirmButton.clicked += OnComfirmButtonClicked;
 
