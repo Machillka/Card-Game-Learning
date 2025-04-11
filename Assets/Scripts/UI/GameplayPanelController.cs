@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,9 +12,11 @@ public class GameplayPanelController : MonoBehaviour
     private Label discardAmountLabel;
     private Label turnLabel;
     private Button endTurnButton;
+    private Button menuButton;
 
     [Header("广播事件")]
     public ObjectEventSO playerTurnEndEvent;
+    public ObjectEventSO pauseGameEvent;
 
     private void OnEnable()
     {
@@ -25,13 +28,22 @@ public class GameplayPanelController : MonoBehaviour
         discardAmountLabel = rootElement.Q<Label>("DiscardAmountLabel");
         turnLabel = rootElement.Q<Label>("TurnLabel");
         endTurnButton = rootElement.Q<Button>("EndTurn");
+        menuButton = rootElement.Q<Button>("MenuButton");
+
 
         endTurnButton.clicked += OnEndPlayerTurn;
+        menuButton.clicked += OnShowMenu;
 
         energyAmountLabel.text = "0";
         discardAmountLabel.text = "0";
         drawAmountLabel.text = "0";
         turnLabel.text = "游戏开始";
+    }
+
+    public void OnShowMenu()
+    {
+        Debug.Log("BackToMenuButtonClicked");
+        pauseGameEvent.RaiseEvent(null, this);
     }
 
     public void UpdateDrawCountChange(int value)

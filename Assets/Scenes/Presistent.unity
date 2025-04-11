@@ -310,6 +310,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &510960057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 510960060}
+  - component: {fileID: 510960059}
+  - component: {fileID: 510960058}
+  m_Layer: 0
+  m_Name: GamePiaying Menu Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &510960058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510960057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6584da01eb7a34f8033a99da79361b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadMapEvent: {fileID: 11400000, guid: a9b0f28e14d18e94eaffb7f3264209e7, type: 2}
+  backToGameEvent: {fileID: 11400000, guid: e0adb5cd6271a554694a4612c00768c3, type: 2}
+--- !u!114 &510960059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510960057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 7cfee0f94f56a4c4e9daa34b1f330f48, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 395c4f603fd73604194209f8d38f1e4b, type: 3}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+--- !u!4 &510960060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510960057}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,6 +1599,7 @@ GameObject:
   - component: {fileID: 1182285091}
   - component: {fileID: 1182285095}
   - component: {fileID: 1182285096}
+  - component: {fileID: 1182285097}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1768,6 +1835,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: PlayerAnimation, Assembly-CSharp
         m_MethodName: PlayingCardAnimation
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1182285097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182285086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2a1f1b4eb77c340b015ee963d4f74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: a8706f8ef18c45e448505585c4478f66, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1182285088}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: NewGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2482,7 +2577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1772199437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2496,6 +2591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTurnEndEvent: {fileID: 11400000, guid: b794a468e8c472b469a220e6d0255857, type: 2}
+  pauseGameEvent: {fileID: 0}
 --- !u!114 &1772199438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2955,3 +3051,4 @@ SceneRoots:
   - {fileID: 1360711931}
   - {fileID: 600763807}
   - {fileID: 188381118}
+  - {fileID: 510960060}

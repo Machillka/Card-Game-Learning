@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 7674551036546601452}
   - component: {fileID: 3030433395675356626}
   - component: {fileID: 8181335413883713242}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RoomPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,6 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 0
   line: 0
+  scaleFactor: 1.1
   roomData: {fileID: 11400000, guid: 1c0bc292287aa0c4faaa30d7f2710002, type: 2}
   roomState: 0
+  linkTo: []
   loadRoomEvent: {fileID: 11400000, guid: e4f1e12d56f92684484903b8b5fe10ab, type: 2}

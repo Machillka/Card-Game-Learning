@@ -10,12 +10,11 @@ public class Player : CharacterBase
     private void OnEnable()
     {
         playerMana.maxValue = maxMana;
-        CurrentHP = playerMana.maxValue;
+        CurrentHP = maxHP;
     }
 
     public void NewTurn()
     {
-        Debug.Log("SetMana");
         CurrentMana = maxMana;
         //TODO: 重置其他状态
     }

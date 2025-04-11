@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using DG.Tweening;
 
-public class Room : MonoBehaviour
+public class Room : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public int column;
     public int line;
+    public float scaleFactor = 1.1f;
     private SpriteRenderer spriteRenderer;
     public RoomDataSO roomData;
     public RoomState roomState;
@@ -56,4 +59,38 @@ public class Room : MonoBehaviour
             _ => spriteRenderer.color
         };
     }
+
+    /// <summary>
+    /// 鼠标移动到房间上的悬浮动画
+    /// </summary>
+    public void OnHoverEnterAnimation()
+    {
+        transform.DOScale(Vector3.one * scaleFactor, 0.2f);
+    }
+
+    /// <summary>
+    /// 鼠标移出房间的悬浮动画
+    /// </summary>
+    public void OnHoverExitAnimation()
+    {
+        if (roomState == RoomState.Locked)
+        {
+            return;
+        }
+
+        transform.DOScale(Vector3.one, 0.2f);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Hovering");
+        OnHoverEnterAnimation();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Hover Exit");
+        OnHoverExitAnimation();
+    }
+
 }
