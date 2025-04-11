@@ -18,6 +18,7 @@ public class CardDeck : MonoBehaviour
     [Header("事件广播")]
     public IntEventSO drawCountEvent;
     public IntEventSO discardCountEvent;
+    public ObjectEventSO playerTurnEndEvent;
 
     private void Start()
     {
@@ -27,8 +28,7 @@ public class CardDeck : MonoBehaviour
 
     public void NewTurnDrawCards()
     {
-        //TODO: 应该是先回复cost 再抽牌 需要重新设置执行顺序
-        Debug.Log("DrawNewCards");
+        //TODO[x] 应该是先回复cost 再抽牌 需要重新设置执行顺序
         DrawCard(4);
     }
 
@@ -44,7 +44,7 @@ public class CardDeck : MonoBehaviour
             }
         }
 
-        //TODO: 洗牌 更新弃牌堆|抽牌堆的数字
+        //TODO[x] 洗牌 更新弃牌堆|抽牌堆的数字
         ShuffleDeck();
     }
 
@@ -60,7 +60,7 @@ public class CardDeck : MonoBehaviour
         {
             if (drawDeck.Count == 0)
             {
-                // TODO: 洗牌 更新弃牌堆|抽牌堆的数字
+                // TODO[x] 洗牌 更新弃牌堆|抽牌堆的数字
                 foreach (var item in discardDeck)
                 {
                     drawDeck.Add(item);
@@ -144,6 +144,17 @@ public class CardDeck : MonoBehaviour
         discardCountEvent.RaiseEvent(discardDeck.Count, this);
 
         SetCardLayout(0f);
+    }
+
+    /// <summary>
+    /// 检测手牌数量, 如果没有手牌, 则结束玩家回合
+    /// </summary>
+    public void CheckHandCard()
+    {
+        if (handCardList.Count <= 0)
+        {
+            StartCoroutine(playerTurnEndEvent.DelayRaiseEvent(null, this, 0.7f));
+        }
     }
 
     [ContextMenu("TestUI")]

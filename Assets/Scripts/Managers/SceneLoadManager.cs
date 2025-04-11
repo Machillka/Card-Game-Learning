@@ -83,7 +83,6 @@ public class SceneLoadManager : MonoBehaviour
 
     public async void LoadMenu()
     {
-
         // 表示第一次加载
         if(currentScene != null)
             await UnloadSceneTask();

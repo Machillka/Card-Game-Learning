@@ -52,19 +52,6 @@ public class CardLayoutManager : MonoBehaviour
         // 向下移动中心点
         centerPosition = Vector3.up * sectorCenterY;
 
-        // 计算总的角度变化
-        // float cardAngle = (numberOfCards - 1) * angleBetweenCards / 2;
-        // float totalAlgle = Mathf.Min(maxSectorWidth / 2, cardAngle);
-
-        // for (int i = 0; i < numberOfCards; i++)
-        // {
-        //     var deltaAngle = cardAngle -  i * angleBetweenCards;
-        //     var pos = SectorCardPositon(deltaAngle);
-        //     var rotation = Quaternion.Euler(0, 0, deltaAngle);
-
-        //     cardPositionList.Add(pos);
-        //     cardRotationList.Add(rotation);
-        // }
         // 总展开角度计算
         float cardAngle = (numberOfCards - 1) * angleBetweenCards;
         // 限制角度

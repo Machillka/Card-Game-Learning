@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : CharacterBase
@@ -6,6 +7,18 @@ public class Player : CharacterBase
     public int maxMana;
 
     public int CurrentMana { get => playerMana.currentValue; set => playerMana.SetValue(value); }
+
+    public ObjectEventSO playerTurnEnd;
+
+    //TODO: 此处改为在 Mana 改变的事件中使用监听来发送广播
+    protected override void Update()
+    {
+        if (CurrentMana <= 0)
+        {
+            StartCoroutine(playerTurnEnd.DelayRaiseEvent(null, this, 0.7f));
+            // StartCoroutine(DelayPlayerTurnEnd());
+        }
+    }
 
     private void OnEnable()
     {
@@ -29,10 +42,15 @@ public class Player : CharacterBase
 
     public void NewGame()
     {
-        Debug.Log($"Newgame, HP = {CurrentHP}");
         CurrentHP = MaxHP;
         isDead = false;
         buffRound.currentValue = 0;
         NewTurn();
     }
+
+    // IEnumerator DelayPlayerTurnEnd()
+    // {
+    //     yield return new WaitForSeconds(1.5f);
+    //     playerTurnEnd.RaiseEvent(null, this);
+    // }
 }

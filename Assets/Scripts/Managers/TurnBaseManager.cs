@@ -1,7 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class TurnBaseManager : MonoBehaviour
 {
+    private Timer _enemyTurnDurationTimer;
+    private Timer _playerTurnDelayTimer;
+
     public GameObject playerObj;
 
     private bool isPlayerTurn = false;
@@ -18,6 +22,13 @@ public class TurnBaseManager : MonoBehaviour
     public ObjectEventSO enemyTurnBegin;
     public ObjectEventSO enemyTurnEnd;
 
+    private void Awake()
+    {
+        _enemyTurnDurationTimer = new Timer(2.5f, EnemyTurnEnd);
+        _playerTurnDelayTimer = new Timer(0.7f, PlayerTurnBegin);
+    }
+
+    //TODO[x] 修改回合转化逻辑
     private void Update()
     {
         if (battleEnd)
@@ -27,29 +38,40 @@ public class TurnBaseManager : MonoBehaviour
 
         if (isEnemyTurn)
         {
-            timeCounter += Time.deltaTime;
-
-            if (timeCounter >= enemyTurnDuration)
-            {
-                timeCounter = 0f;
-                //TODO: 敌人回合结束
-                EnemyTurnEnd();
-                isPlayerTurn = true;
-            }
+            _enemyTurnDurationTimer.UpdateTimer(Time.deltaTime);
         }
 
         if (isPlayerTurn)
         {
-            timeCounter += Time.deltaTime;
-
-            if (timeCounter >= playerTurnDuration)
-            {
-                timeCounter = 0f;
-                //TODO: 玩家回合结束 敌人回合开始
-                PlayerTurnBegin();
-                isPlayerTurn = false;
-            }
+            _playerTurnDelayTimer.UpdateTimer(Time.deltaTime);
         }
+
+        // // 到敌人回合, 直接开始 然后经过一段时间之后结束敌人回合
+        // // 此种写法, 如果还没有到时间就结束的话, 虽然会导致计时不准确, 但是依旧会继续计时, 并且到了 duration 后 reset（因为在自己的update中重复执行）
+        // if (isEnemyTurn)
+        // {
+        //     timeCounter += Time.deltaTime;
+
+        //     if (timeCounter >= enemyTurnDuration)
+        //     {
+        //         timeCounter = 0f;
+        //         EnemyTurnEnd();
+        //         isPlayerTurn = true;
+        //     }
+        // }
+
+        // // 到了玩家回合 先进行一个 delay 然后进入玩家回合
+        // if (isPlayerTurn)
+        // {
+        //     timeCounter += Time.deltaTime;
+
+        //     if (timeCounter >= playerTurnDuration)
+        //     {
+        //         timeCounter = 0f;
+        //         PlayerTurnBegin();
+        //         isPlayerTurn = false;
+        //     }
+        // }
     }
 
     [ContextMenu("Game Start")]
@@ -64,6 +86,10 @@ public class TurnBaseManager : MonoBehaviour
     public void PlayerTurnBegin()
     {
         playerTurnBegin.RaiseEvent(null, this);
+        isPlayerTurn = false;
+
+        // 重置计时器
+        _playerTurnDelayTimer.ResetTime();
     }
 
     public void EnemyTurnBegin()
@@ -76,6 +102,10 @@ public class TurnBaseManager : MonoBehaviour
     {
         isEnemyTurn = false;
         enemyTurnEnd.RaiseEvent(null, this);
+        isPlayerTurn = true;
+
+        // 重置计时器
+        _enemyTurnDurationTimer.ResetTime();
     }
 
     public void OnRoomLoadEvent(object obj)
@@ -112,5 +142,9 @@ public class TurnBaseManager : MonoBehaviour
     public void NewGame()
     {
         playerObj.GetComponent<Player>().NewGame();
+
+        // 进入新游戏重置计时器, 计时准确
+        _playerTurnDelayTimer.ResetTime();
+        _enemyTurnDurationTimer.ResetTime();
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,4 +15,14 @@ public class BaseEventSO<T> : ScriptableObject
         OnEventRaised?.Invoke(value);
         lastSender = sender.ToString();
     }
+
+    public IEnumerator DelayRaiseEvent(T value, object sender, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        Debug.Log("Delay end!");
+        OnEventRaised?.Invoke(value);
+        lastSender = sender.ToString();
+    }
+
+
 }

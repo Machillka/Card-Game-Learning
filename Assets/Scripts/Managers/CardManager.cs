@@ -15,6 +15,8 @@ public class CardManager : MonoBehaviour
     private int previousIndex = -1; // 上一次抽到的卡牌索引
     private int randomIndex = 0;    // 当前抽到的卡牌索引
 
+    public ObjectEventSO playerTurnEndEvent;
+
     private void Awake()
     {
         InitializeCardDataList();
@@ -26,6 +28,7 @@ public class CardManager : MonoBehaviour
             currnetCardLibrary.cardLibraryList.Add(card);
         }
     }
+
     #region 获取卡牌库
     private void InitializeCardDataList()
     {
@@ -79,9 +82,6 @@ public class CardManager : MonoBehaviour
         do
         {
             randomIndex = Random.Range(0, cardDataList.Count);
-            // Debug.Log($"抽到的卡牌索引: {randomIndex}");
-            // Debug.Log($"抽到的卡牌名称: {cardDataList[randomIndex].cardName}");
-            // Debug.Log($"抽到的卡牌类型: {cardDataList[randomIndex].cardType}");
         }
         while (previousIndex == randomIndex);
         previousIndex = randomIndex;

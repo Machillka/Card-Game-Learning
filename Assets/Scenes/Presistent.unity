@@ -327,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &510960058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +572,7 @@ MonoBehaviour:
   isHorizontal: 1
   drawCountEvent: {fileID: 11400000, guid: b127c135ed1c2854aaf7fb0bd182457d, type: 2}
   discardCountEvent: {fileID: 11400000, guid: 3a774655ea70f1f40a8f38f7facae0d6, type: 2}
+  playerTurnEndEvent: {fileID: 11400000, guid: b794a468e8c472b469a220e6d0255857, type: 2}
 --- !u!4 &544861349
 Transform:
   m_ObjectHideFlags: 0
@@ -607,6 +608,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: CardDeck, Assembly-CSharp
         m_MethodName: DiscardCard
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 544861348}
+        m_TargetAssemblyTypeName: CardDeck, Assembly-CSharp
+        m_MethodName: CheckHandCard
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1648,6 +1661,7 @@ MonoBehaviour:
   characterDeathEvent: {fileID: 11400000, guid: 6fb26d9acce74d1429d8f397dc54d52f, type: 2}
   playerMana: {fileID: 11400000, guid: 61ffd88176ed276499b99a7c2f5c664d, type: 2}
   maxMana: 5
+  playerTurnEnd: {fileID: 11400000, guid: b794a468e8c472b469a220e6d0255857, type: 2}
 --- !u!114 &1182285089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2577,7 +2591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1772199437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2591,7 +2605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTurnEndEvent: {fileID: 11400000, guid: b794a468e8c472b469a220e6d0255857, type: 2}
-  pauseGameEvent: {fileID: 0}
+  pauseGameEvent: {fileID: 11400000, guid: b4427d450b50d9641bb3f462188e2ebd, type: 2}
 --- !u!114 &1772199438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2830,6 +2844,7 @@ MonoBehaviour:
   cardDataList: []
   newGameCardLibrary: {fileID: 11400000, guid: 1e98e5330d405f7488b03259895fc2ff, type: 2}
   currnetCardLibrary: {fileID: 11400000, guid: 2a4630c934dbcbe4c8617d7a19976396, type: 2}
+  playerTurnEndEvent: {fileID: 0}
 --- !u!4 &1890654181
 Transform:
   m_ObjectHideFlags: 0

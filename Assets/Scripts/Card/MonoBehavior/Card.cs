@@ -85,7 +85,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void ExcuteCardEffects(CharacterBase from, CharacterBase target)
     {
-        //TODO: 回收卡牌和cost减少
+        //TODO[x] 回收卡牌和cost减少
         costEvent.RaiseEvent(cardData.cardCost, this);
         discardCardEvent.RaiseEvent(this, this);
         foreach (var effect in cardData.effects)

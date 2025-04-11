@@ -40,9 +40,9 @@ public class GameplayPanelController : MonoBehaviour
         turnLabel.text = "游戏开始";
     }
 
+
     public void OnShowMenu()
     {
-        Debug.Log("BackToMenuButtonClicked");
         pauseGameEvent.RaiseEvent(null, this);
     }
 
